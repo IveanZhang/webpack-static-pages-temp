@@ -1,7 +1,7 @@
 {
-  "name": "webpack-temp",
+  "name": "webpack-static-pages-temp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example of a static website assembled by using webpack v4",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js --mode development",
