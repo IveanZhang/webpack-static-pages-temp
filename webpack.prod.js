@@ -13,10 +13,7 @@ module.exports = {
 
     // https://webpack.js.org/concepts/entry-points/#multi-page-application
     entry: {
-        common: './src/common/common.js',
-        index: './src/index/index.js',
-        about: './src/about/about.js',
-        contacts: './src/contacts/contacts.js'
+        common: './src/common/common.js'
     },
 
     // how to write the compiled files to disk
@@ -43,6 +40,19 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     "css-loader"
                 ]
+            },
+            {
+                // Load all images as base64 encoding if they are smaller than 8192 bytes
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      name: '[name].[hash:20].[ext]',
+                      limit: 8192
+                    }
+                  }
+                ]
             }
         ]
     },
@@ -54,18 +64,6 @@ module.exports = {
             inject: 'body',
             chunks: ['common'],
             filename: 'index.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/about/about.html',
-            inject: 'body',
-            chunks: ['common'],
-            filename: 'about.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/contacts/contacts.html',
-            inject: 'body',
-            chunks: ['common'],
-            filename: 'contacts.html'
         }),
         new MiniCssExtractPlugin({
             filename: "css/[name].[contenthash].css",
